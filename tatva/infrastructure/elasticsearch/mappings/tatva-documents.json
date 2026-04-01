@@ -1,0 +1,53 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "refresh_interval": "5s",
+    "analysis": {
+      "analyzer": {
+        "tatva_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": ["lowercase", "asciifolding"]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "id": { "type": "keyword" },
+      "title": {
+        "type": "text",
+        "analyzer": "tatva_analyzer",
+        "fields": { "keyword": { "type": "keyword" } }
+      },
+      "content": {
+        "type": "text",
+        "analyzer": "tatva_analyzer"
+      },
+      "summary": {
+        "type": "text",
+        "analyzer": "tatva_analyzer"
+      },
+      "sourceUrl": { "type": "keyword" },
+      "sourceName": { "type": "keyword" },
+      "sourceTier": { "type": "integer" },
+      "author": { "type": "keyword" },
+      "publishedAt": { "type": "date" },
+      "ingestedAt": { "type": "date" },
+      "language": { "type": "keyword" },
+      "domain": { "type": "keyword" },
+      "entityIds": { "type": "keyword" },
+      "contentHash": { "type": "keyword" },
+      "credibilityScore": { "type": "float" },
+      "clearanceLevel": { "type": "integer" },
+      "embedding": {
+        "type": "dense_vector",
+        "dims": 384,
+        "index": true,
+        "similarity": "cosine"
+      },
+      "metadata": { "type": "object", "enabled": false }
+    }
+  }
+}

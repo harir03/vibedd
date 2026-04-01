@@ -1,0 +1,19 @@
+{
+  "name": "aria-monorepo",
+  "private": true,
+  "description": "ARIA — Adaptive Response & Intelligence Agent — Monorepo Root",
+  "workspaces": [
+    "apps/*",
+    "services/*",
+    "libs/*",
+    "libs/references/*"
+  ],
+  "scripts": {
+    "dev:dashboard": "set MONGODB_URI=mongodb://localhost:27018/aria_db&& npm run dev -w apps/dashboard",
+    "start:gateway": "set MONGODB_URI=mongodb://localhost:27018/aria_db&& npm run start -w apps/gateway",
+    "install:all": "npm install",
+    "docker:up": "cd infrastructure && docker-compose up -d",
+    "docker:down": "cd infrastructure && docker-compose down",
+    "db:seed": "set MONGODB_URI=mongodb://localhost:27018/aria_db&& node infrastructure/seed_node.js"
+  }
+}

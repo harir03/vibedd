@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --color-tatva-teal: #0d9488;
+  --color-tatva-teal-light: #f0fdfa;
+  --color-tatva-bg: #f8fafc;
+  --color-tatva-card: #ffffff;
+  --color-tatva-border: #e2e8f0;
+  --color-tatva-text-primary: #1e293b;
+  --color-tatva-text-secondary: #64748b;
+  --color-tatva-text-muted: #94a3b8;
+
+  --color-domain-geopolitics: #3b82f6;
+  --color-domain-economics: #22c55e;
+  --color-domain-defense: #ef4444;
+  --color-domain-technology: #a855f7;
+  --color-domain-climate: #f97316;
+  --color-domain-society: #eab308;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+:root {
+  --background: #f8fafc;
+  --foreground: #1e293b;
+}
+
+.dark {
+  --background: #0a0c10;
+  --foreground: #f1f5f9;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+@layer components {
+  .sl-card {
+    @apply bg-tatva-card border border-tatva-border rounded-lg shadow-sm;
+  }
+
+  .sl-sidebar-item {
+    @apply flex items-center gap-3 px-6 py-3 text-sm font-medium transition-colors text-tatva-text-secondary hover:bg-slate-50 hover:text-tatva-text-primary;
+  }
+
+  .sl-sidebar-item-active {
+    @apply bg-tatva-teal text-white hover:bg-tatva-teal/90;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Remove Recharts Focus Outline */
+.recharts-wrapper,
+.recharts-surface,
+.recharts-responsive-container {
+  outline: none !important;
+}
+
+*:focus {
+  outline: none !important;
+}

@@ -1,0 +1,16 @@
+{
+  "name": "aria-self-evolving-agent",
+  "version": "1.0.0",
+  "description": "ARIA — Self-evolving detection agent: generates regex, evolves prompts, tunes thresholds",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "ioredis": "^5.6.1",
+    "mongoose": "^8.15.1",
+    "pino": "^9.7.0",
+    "pino-pretty": "^13.0.0"
+  }
+}

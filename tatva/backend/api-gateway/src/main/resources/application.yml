@@ -1,0 +1,96 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  # PostgreSQL datasource for user authentication
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:5432/${POSTGRES_DB:tatva}
+    username: ${POSTGRES_USER:tatva}
+    password: ${POSTGRES_PASSWORD:tatva2026}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: ingestion-service
+            uri: http://localhost:8081
+            predicates:
+              - Path=/api/v1/ingestion/**
+
+          - id: graph-service
+            uri: http://localhost:8082
+            predicates:
+              - Path=/api/v1/graph/**,/api/v1/entities/**,/api/v1/relationships/**
+
+          - id: search-service
+            uri: http://localhost:8083
+            predicates:
+              - Path=/api/v1/search/**
+
+          - id: analytics-service
+            uri: http://localhost:8084
+            predicates:
+              - Path=/api/v1/analytics/**,/api/v1/trends/**
+
+          - id: alert-service
+            uri: http://localhost:8085
+            predicates:
+              - Path=/api/v1/alerts/**,/api/v1/watchlist/**
+
+          - id: audit-service
+            uri: http://localhost:8086
+            predicates:
+              - Path=/api/v1/audit/**
+
+          - id: nlp-service
+            uri: http://localhost:8000
+            predicates:
+              - Path=/api/v1/nlp/**
+
+          - id: reasoning-service
+            uri: http://localhost:8001
+            predicates:
+              - Path=/api/v1/reasoning/**,/api/v1/query/**
+
+# --- TATVA JWT Configuration ---
+tatva:
+  jwt:
+    access-token-expiry-minutes: 15
+    refresh-token-expiry-hours: 24
+    issuer: tatva-gateway
+  rate-limit:
+    admin: 5000
+    analyst: 500
+    api-consumer: 1000
+    public: 60
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.tatva: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

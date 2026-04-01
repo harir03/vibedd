@@ -1,0 +1,27 @@
+# ARIA Python Detection Service — Unified requirements
+# Combines: anomaly-detection (Feature 05), behavioral-analytics (Feature 06),
+# predictive-analysis (Feature 13), and the FastAPI wrapper.
+
+# Web framework
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+
+# Database / Cache
+pymongo>=4.7.0
+redis>=5.0.0
+chromadb-client>=0.5.0
+
+# ML / Anomaly Detection (Feature 05)
+pyod>=2.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+tsfresh>=0.20.0
+
+# UEBA / Behavioral Analytics (Feature 06)
+python-dateutil>=2.8.0
+
+# Predictive Analysis (Feature 13)
+requests>=2.31.0
+
+# Utilities
+pydantic>=2.0.0

@@ -1,0 +1,50 @@
+# TATVA ML Engine — NLP & Reasoning Services
+# Python 3.12+ | FastAPI | spaCy | Transformers | LangChain | Ollama
+
+# ─── Core Framework ───
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.1
+python-multipart==0.0.20
+
+# ─── NLP ───
+spacy==3.7.6
+transformers==4.47.1
+sentence-transformers==3.3.1
+torch==2.5.1
+
+# ─── LLM Integration (Local Inference Only) ───
+langchain==0.3.14
+langchain-community==0.3.14
+ollama==0.4.7
+
+# ─── Data Processing ───
+numpy==2.2.2
+pandas==2.2.3
+
+# ─── Kafka ───
+confluent-kafka==2.6.1
+
+# ─── Database Clients ───
+neo4j==5.26.0
+elasticsearch==8.17.0
+asyncpg==0.30.0
+redis==5.2.1
+
+# ─── HTTP Client ───
+httpx==0.28.1
+
+# ─── Logging ───
+structlog==24.4.0
+
+# ─── Testing ───
+pytest==8.3.4
+pytest-asyncio==0.25.2
+hypothesis==6.119.3
+
+# ─── Type Checking ───
+mypy==1.14.1
+
+# ─── Transliteration (Hindi ↔ English) ───
+indic-transliteration==2.4.1

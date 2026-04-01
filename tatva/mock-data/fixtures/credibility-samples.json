@@ -1,0 +1,170 @@
+[
+  {
+    "factId": "cred-001",
+    "statement": "India deployed additional troops in Ladakh after the Galwan clash in June 2020",
+    "entityRefs": ["loc-001", "loc-015", "evt-001"],
+    "sources": [
+      { "sourceId": "src-001", "reliability": 0.9, "publishedAt": "2020-06-17" },
+      { "sourceId": "src-003", "reliability": 0.9, "publishedAt": "2020-06-18" },
+      { "sourceId": "src-006", "reliability": 0.7, "publishedAt": "2020-06-17" },
+      { "sourceId": "src-013", "reliability": 0.5, "publishedAt": "2020-06-19" }
+    ],
+    "numIndependentSources": 4,
+    "contradictions": 0,
+    "daysSinceFirstReport": 1750,
+    "scores": {
+      "sourceReliability": 0.9,
+      "corroborationScore": 0.58,
+      "recencyScore": 0.0,
+      "contradictionPenalty": 0.0
+    },
+    "finalCredibility": 0.50,
+    "comment": "Well-corroborated fact from high-tier sources but low recency due to age"
+  },
+  {
+    "factId": "cred-002",
+    "statement": "Chandrayaan-3 successfully landed on the Moon on August 23, 2023",
+    "entityRefs": ["act-017", "evt-008"],
+    "sources": [
+      { "sourceId": "src-001", "reliability": 0.9, "publishedAt": "2023-08-23" },
+      { "sourceId": "src-003", "reliability": 0.9, "publishedAt": "2023-08-23" },
+      { "sourceId": "src-004", "reliability": 0.9, "publishedAt": "2023-08-23" },
+      { "sourceId": "src-006", "reliability": 0.7, "publishedAt": "2023-08-23" },
+      { "sourceId": "src-007", "reliability": 0.7, "publishedAt": "2023-08-23" },
+      { "sourceId": "src-010", "reliability": 0.7, "publishedAt": "2023-08-23" }
+    ],
+    "numIndependentSources": 6,
+    "contradictions": 0,
+    "daysSinceFirstReport": 930,
+    "scores": {
+      "sourceReliability": 0.9,
+      "corroborationScore": 0.67,
+      "recencyScore": 0.0,
+      "contradictionPenalty": 0.0
+    },
+    "finalCredibility": 0.52,
+    "comment": "Very well corroborated by 6 independent high-tier sources. Low recency due to age."
+  },
+  {
+    "factId": "cred-003",
+    "statement": "Anonymous claims of secret India-Taiwan military cooperation",
+    "entityRefs": ["loc-001", "loc-009"],
+    "sources": [
+      { "sourceId": "src-020", "reliability": 0.1, "publishedAt": "2025-03-01" }
+    ],
+    "numIndependentSources": 1,
+    "contradictions": 0,
+    "daysSinceFirstReport": 8,
+    "scores": {
+      "sourceReliability": 0.1,
+      "corroborationScore": 0.0,
+      "recencyScore": 0.92,
+      "contradictionPenalty": 0.0
+    },
+    "finalCredibility": 0.17,
+    "comment": "Single anonymous source (T5). Very low reliability. Should be flagged for review."
+  },
+  {
+    "factId": "cred-004",
+    "statement": "India-China agreed on LAC disengagement at Depsang and Demchok in October 2024",
+    "entityRefs": ["loc-001", "loc-002", "evt-030"],
+    "sources": [
+      { "sourceId": "src-001", "reliability": 0.9, "publishedAt": "2024-10-21" },
+      { "sourceId": "src-003", "reliability": 0.9, "publishedAt": "2024-10-21" },
+      { "sourceId": "src-006", "reliability": 0.7, "publishedAt": "2024-10-22" }
+    ],
+    "numIndependentSources": 3,
+    "contradictions": 0,
+    "daysSinceFirstReport": 139,
+    "scores": {
+      "sourceReliability": 0.9,
+      "corroborationScore": 0.52,
+      "recencyScore": 0.25,
+      "contradictionPenalty": 0.0
+    },
+    "finalCredibility": 0.51,
+    "comment": "Well-sourced from Reuters and GoI. Recent fact."
+  },
+  {
+    "factId": "cred-005",
+    "statement": "BrahMos missile tested with 800km extended range",
+    "entityRefs": ["act-031", "act-011"],
+    "sources": [
+      { "sourceId": "src-013", "reliability": 0.5, "publishedAt": "2025-02-15" },
+      { "sourceId": "src-019", "reliability": 0.3, "publishedAt": "2025-02-16" }
+    ],
+    "numIndependentSources": 2,
+    "contradictions": 1,
+    "daysSinceFirstReport": 22,
+    "scores": {
+      "sourceReliability": 0.5,
+      "corroborationScore": 0.37,
+      "recencyScore": 0.80,
+      "contradictionPenalty": 0.20
+    },
+    "finalCredibility": 0.37,
+    "comment": "Mid-tier and blog sources. One contradiction from official denying range specifics."
+  },
+  {
+    "factId": "cred-006",
+    "statement": "India's GDP growth projected at 7.3% for FY2025",
+    "entityRefs": ["loc-001", "act-035", "act-036"],
+    "sources": [
+      { "sourceId": "src-001", "reliability": 0.9, "publishedAt": "2025-01-15" },
+      { "sourceId": "src-003", "reliability": 0.9, "publishedAt": "2025-01-15" },
+      { "sourceId": "src-006", "reliability": 0.7, "publishedAt": "2025-01-16" },
+      { "sourceId": "src-008", "reliability": 0.7, "publishedAt": "2025-01-16" }
+    ],
+    "numIndependentSources": 4,
+    "contradictions": 0,
+    "daysSinceFirstReport": 53,
+    "scores": {
+      "sourceReliability": 0.9,
+      "corroborationScore": 0.58,
+      "recencyScore": 0.59,
+      "contradictionPenalty": 0.0
+    },
+    "finalCredibility": 0.60,
+    "comment": "Strong corroboration from Reuters and GoI. Recent and consistent."
+  },
+  {
+    "factId": "cred-007",
+    "statement": "China planning to establish second overseas military base in Cambodia",
+    "entityRefs": ["loc-002"],
+    "sources": [
+      { "sourceId": "src-004", "reliability": 0.9, "publishedAt": "2025-02-28" },
+      { "sourceId": "src-021", "reliability": 0.6, "publishedAt": "2025-03-01" }
+    ],
+    "numIndependentSources": 2,
+    "contradictions": 1,
+    "daysSinceFirstReport": 9,
+    "scores": {
+      "sourceReliability": 0.9,
+      "corroborationScore": 0.37,
+      "recencyScore": 0.91,
+      "contradictionPenalty": 0.20
+    },
+    "finalCredibility": 0.39,
+    "comment": "AP reported, Xinhua denied. Contradiction lowers score despite high source tier."
+  },
+  {
+    "factId": "cred-008",
+    "statement": "Circular citation test: Source A cites Source B which cites Source A about India submarine fleet size",
+    "entityRefs": ["act-012"],
+    "sources": [
+      { "sourceId": "src-019", "reliability": 0.3, "publishedAt": "2025-03-05" },
+      { "sourceId": "src-020", "reliability": 0.1, "publishedAt": "2025-03-06" }
+    ],
+    "numIndependentSources": 1,
+    "contradictions": 0,
+    "daysSinceFirstReport": 4,
+    "scores": {
+      "sourceReliability": 0.3,
+      "corroborationScore": 0.0,
+      "recencyScore": 0.96,
+      "contradictionPenalty": 0.0
+    },
+    "finalCredibility": 0.25,
+    "comment": "Circular citation detected — only 1 independent root source. Both are low-tier."
+  }
+]

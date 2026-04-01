@@ -1,0 +1,54 @@
+Starting Gateway...
+Starting Dashboard...
+[Gateway] 
+> start:gateway
+> npm run start -w apps/gateway
+
+[Dashboard] 
+> dev:dashboard
+> npm run dev -w apps/dashboard
+
+[Gateway ERROR] npm error code EDUPLICATEWORKSPACE
+[Dashboard ERROR] npm error code EDUPLICATEWORKSPACE
+[Gateway ERROR] npm error must not have multiple workspaces with the same name
+npm error package 'aria-gateway' has conflicts in the following paths:
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\apps\gateway
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\libs\references\01-reverse-proxy-gateway
+npm error package 'aria-fidelity-ranking' has conflicts in the following paths:
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\services\fidelity-ranking
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\libs\references\07-fidelity-ranking
+npm error package 'aria-log-ingestion' has conflicts in the following paths:
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\services\log-ingestion
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\libs\references\04-log-ingestion
+npm error package 'aria-playbook-generation' has conflicts in the following paths:
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\services\playbook-generation
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\libs\references\09-playbook-generation
+npm error package 'aria-self-evolving-agent' has conflicts in the following paths:
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\services\self-evolving-agent
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\libs\references\10-self-evolving-agent
+npm error package 'mafai' has conflicts in the following paths:
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\libs\sdk-middleware
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\libs\references\03-middleware-sdk-reference
+[Dashboard ERROR] npm error must not have multiple workspaces with the same name
+npm error package 'aria-gateway' has conflicts in the following paths:
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\apps\gateway
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\libs\references\01-reverse-proxy-gateway
+npm error package 'aria-fidelity-ranking' has conflicts in the following paths:
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\services\fidelity-ranking
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\libs\references\07-fidelity-ranking
+npm error package 'aria-log-ingestion' has conflicts in the following paths:
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\services\log-ingestion
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\libs\references\04-log-ingestion
+npm error package 'aria-playbook-generation' has conflicts in the following paths:
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\services\playbook-generation
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\libs\references\09-playbook-generation
+npm error package 'aria-self-evolving-agent' has conflicts in the following paths:
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\services\self-evolving-agent
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\libs\references\10-self-evolving-agent
+npm error package 'mafai' has conflicts in the following paths:
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\libs\sdk-middleware
+npm error     C:\Users\harir\Downloads\ALL\projects\aria\libs\references\03-middleware-sdk-reference
+[Gateway ERROR] npm error A complete log of this run can be found in: C:\Users\harir\AppData\Local\npm-cache\_logs\2026-03-21T08_14_39_008Z-debug-0.log
+[Dashboard ERROR] npm error A complete log of this run can be found in: C:\Users\harir\AppData\Local\npm-cache\_logs\2026-03-21T08_14_39_010Z-debug-0.log
+[Gateway] exited with code 1
+[Dashboard] exited with code 1

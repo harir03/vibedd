@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(done)",
+      "Bash(# Check docker-compose to see which services are actually defined cat C:/Users/harir/Downloads/ALL/projects/aria/infrastructure/docker-compose.yml)",
+      "Bash(# Check the query page cat C:/Users/harir/Downloads/ALL/projects/aria/apps/dashboard/src/app/query/page.tsx)",
+      "Bash(# Check playbooks page and API cat C:/Users/harir/Downloads/ALL/projects/aria/apps/dashboard/src/app/playbooks/page.tsx)",
+      "Bash(# Check playbooks API POST \\(generation part\\) and services/playbook-generation cat C:/Users/harir/Downloads/ALL/projects/aria/apps/dashboard/src/app/api/playbooks/route.ts)",
+      "Bash(# Check if API routes use auth and if middleware protects routes cat C:/Users/harir/Downloads/ALL/projects/aria/apps/dashboard/src/middleware.ts || echo \"\"NO middleware.ts\"\" grep -rn \"\"auth0\\\\|getSession\\\\|withApiAuth\\\\|requireAuth\\\\|auth0.getSession\"\" C:/Users/harir/Downloads/ALL/projects/aria/apps/dashboard/src/app/api --include=\"\"*.ts\"\")",
+      "Bash(# Check evolution page and API cat C:/Users/harir/Downloads/ALL/projects/aria/apps/dashboard/src/app/api/evolution/route.ts)"
+    ]
+  }
+}

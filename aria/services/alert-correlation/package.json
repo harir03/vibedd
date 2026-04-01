@@ -1,0 +1,16 @@
+{
+    "name": "aria-alert-correlation",
+    "version": "1.0.0",
+    "description": "ARIA Alert Correlation Worker - Groups related alerts into incidents using 5 correlation rules",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "mongoose": "^8.1.1",
+        "redis": "^4.6.13",
+        "pino": "^8.19.0"
+    },
+    "author": "",
+    "license": "ISC"
+}

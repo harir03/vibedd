@@ -1,0 +1,87 @@
+﻿node.exe : ΓÜá Warning: Next.js inferred your workspace root, but it may not 
+be correct.
+At line:1 char:1
++ & "C:\nvm4w\nodejs\node_modules\nodejs/node.exe" "C:\nvm4w\nodejs\nod ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ΓÜá Warning: Ne...not be correct. 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+ We detected multiple lockfiles and selected the directory of 
+C:\Users\harir\package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, 
+or consider removing one of the lockfiles if it's not needed.
+   See 
+https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats 
+for more information.
+ Detected additional lockfiles: 
+   * 
+C:\Users\harir\Downloads\ALL\projects\aria\02-dashboard-ui\package-lock.json
+
+Γû▓ Next.js 16.1.4 (webpack)
+
+ΓÜá The "middleware" file convention is deprecated. Please use "proxy" 
+instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 48s
+  Running TypeScript ...
+  Collecting page data using 27 workers ...
+{"level":"info","timestamp":"2026-02-19T20:03:50.042Z","message":"Initializing Redis client with URI: redis://localhost:6379"}
+{"level":"info","timestamp":"2026-02-19T20:03:50.057Z","message":"Initializing Redis client with URI: redis://localhost:6379"}
+{"level":"info","timestamp":"2026-02-19T20:03:50.049Z","message":"Initializing Redis client with URI: redis://localhost:6379"}
+{"level":"info","timestamp":"2026-02-19T20:03:50.052Z","message":"Initializing Redis client with URI: redis://localhost:6379"}
+{"level":"info","timestamp":"2026-02-19T20:03:50.059Z","message":"Initializing Redis client with URI: redis://localhost:6379"}
+{"level":"info","timestamp":"2026-02-19T20:03:50.055Z","message":"Initializing Redis client with URI: redis://localhost:6379"}
+{"level":"info","timestamp":"2026-02-19T20:03:50.049Z","message":"Initializing Redis client with URI: redis://localhost:6379"}
+  Generating static pages using 27 workers (0/19) ...
+  Generating static pages using 27 workers (4/19) 
+  Generating static pages using 27 workers (9/19) 
+  Generating static pages using 27 workers (14/19) 
+Γ£ô Generating static pages using 27 workers (19/19) in 1139.0ms
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+Γöî Γùï /
+Γö£ Γùï /_not-found
+Γö£ Γùï /allow-deny
+Γö£ ╞Æ /api/alerts
+Γö£ ╞Æ /api/applications
+Γö£ ╞Æ /api/applications/[id]/policy
+Γö£ ╞Æ /api/attack-chains
+Γö£ ╞Æ /api/debug/stats
+Γö£ ╞Æ /api/events
+Γö£ ╞Æ /api/evolution
+Γö£ ╞Æ /api/incidents
+Γö£ ╞Æ /api/learning
+Γö£ ╞Æ /api/logs
+Γö£ ╞Æ /api/playbooks
+Γö£ ╞Æ /api/query
+Γö£ ╞Æ /api/services
+Γö£ ╞Æ /api/stats/analysis
+Γö£ ╞Æ /api/stats/security
+Γö£ ╞Æ /api/stats/traffic
+Γö£ ╞Æ /api/triage
+Γö£ Γùï /applications
+Γö£ ╞Æ /applications/[id]
+Γö£ Γùï /attack-chains
+Γö£ Γùï /attacks
+Γö£ Γùï /developers
+Γö£ Γùï /docs
+Γö£ Γùï /evolution
+Γö£ Γùï /incidents
+Γö£ Γùï /learning
+Γö£ Γùï /login
+Γö£ Γùï /playbooks
+Γö£ Γùï /policy
+Γö£ Γùï /pricing
+Γö£ Γùï /query
+Γö£ Γùï /statistics
+Γöö Γùï /triage
+
+
+╞Æ Proxy (Middleware)
+
+Γùï  (Static)   prerendered as static content
+╞Æ  (Dynamic)  server-rendered on demand
+

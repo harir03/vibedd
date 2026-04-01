@@ -1,0 +1,63 @@
+{
+  "name": "mafai",
+  "version": "1.0.0",
+  "description": "A plug-and-play request gatekeeper for Node.js apps.",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:types": "tsc -p tsconfig.types.json",
+    "build": "npm run build:cjs && npm run build:esm && npm run build:types",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SajalRawat/mafai-package.git"
+  },
+  "keywords": [
+    "middleware",
+    "security",
+    "express",
+    "fastify",
+    "nextjs",
+    "nodejs"
+  ],
+  "author": "deniers",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SajalRawat/mafai-package/issues"
+  },
+  "homepage": "https://github.com/SajalRawat/mafai-package#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.0",
+    "fastify": "^5.7.2",
+    "next": "^16.1.6",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "express": "^4.0.0",
+    "fastify": "^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "express": {
+      "optional": true
+    },
+    "fastify": {
+      "optional": true
+    }
+  }
+}

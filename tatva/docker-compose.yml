@@ -1,0 +1,296 @@
+version: '3.9'
+
+# =============================================================================
+# TATVA — Docker Compose Infrastructure
+# AI-Powered Global Ontology Engine | India Innovated Hackathon 2026
+# =============================================================================
+# Services: Neo4j, PostgreSQL, Elasticsearch, Kafka+Zookeeper, Redis, MinIO
+# =============================================================================
+
+services:
+  # ---------------------------------------------------------------------------
+  # Neo4j 5.26 — Knowledge Graph (source of truth for entities & relationships)
+  # ---------------------------------------------------------------------------
+  neo4j:
+    image: neo4j:5.26-community
+    container_name: tatva-neo4j
+    restart: unless-stopped
+    environment:
+      NEO4J_AUTH: ${NEO4J_USER:-neo4j}/${NEO4J_PASSWORD:-tatva_dev_2026}
+      NEO4J_PLUGINS: '["apoc"]'
+      NEO4J_dbms_memory_heap_initial__size: ${NEO4J_HEAP_INITIAL:-512m}
+      NEO4J_dbms_memory_heap_max__size: ${NEO4J_HEAP_MAX:-1G}
+      NEO4J_dbms_memory_pagecache_size: ${NEO4J_PAGECACHE:-512m}
+      NEO4J_dbms_security_procedures_unrestricted: apoc.*
+      NEO4J_dbms_security_procedures_allowlist: apoc.*
+      NEO4J_server_config_strict__validation_enabled: "false"
+    ports:
+      - "${NEO4J_HTTP_PORT:-7474}:7474"
+      - "${NEO4J_BOLT_PORT:-7687}:7687"
+    volumes:
+      - neo4j-data:/data
+      - neo4j-logs:/logs
+      - neo4j-plugins:/plugins
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:7474 || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+    networks:
+      - tatva-net
+
+  # ---------------------------------------------------------------------------
+  # PostgreSQL 16 — Operational metadata, audit trail, user accounts
+  # ---------------------------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: tatva-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-tatva}
+      POSTGRES_USER: ${POSTGRES_USER:-tatva}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-tatva_dev_2026}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./infrastructure/init-db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-tatva} -d ${POSTGRES_DB:-tatva}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - tatva-net
+
+  # ---------------------------------------------------------------------------
+  # Elasticsearch 8.17 — Full-text search + vector (kNN) search
+  # ---------------------------------------------------------------------------
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0
+    container_name: tatva-elasticsearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.security.http.ssl.enabled=false
+      - xpack.security.transport.ssl.enabled=false
+      - ES_JAVA_OPTS=-Xms${ES_HEAP:-512m} -Xmx${ES_HEAP:-512m}
+      - cluster.name=tatva-cluster
+      - bootstrap.memory_lock=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - "${ES_PORT:-9200}:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:9200/_cluster/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+    networks:
+      - tatva-net
+
+  # ---------------------------------------------------------------------------
+  # Zookeeper — Kafka coordination
+  # ---------------------------------------------------------------------------
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.7.0
+    container_name: tatva-zookeeper
+    restart: unless-stopped
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "${ZK_PORT:-2181}:2181"
+    volumes:
+      - zookeeper-data:/var/lib/zookeeper/data
+      - zookeeper-log:/var/lib/zookeeper/log
+    healthcheck:
+      test: ["CMD-SHELL", "echo ruok | nc localhost 2181 | grep imok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - tatva-net
+
+  # ---------------------------------------------------------------------------
+  # Apache Kafka — Event streaming (ingestion, NLP events, graph updates)
+  # ---------------------------------------------------------------------------
+  kafka:
+    image: confluentinc/cp-kafka:7.7.0
+    container_name: tatva-kafka
+    restart: unless-stopped
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,INTERNAL://kafka:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+      KAFKA_LOG_RETENTION_HOURS: ${KAFKA_RETENTION_HOURS:-168}
+      KAFKA_MESSAGE_MAX_BYTES: 10485760
+      KAFKA_REPLICA_FETCH_MAX_BYTES: 10485760
+    ports:
+      - "${KAFKA_PORT:-9092}:9092"
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-broker-api-versions --bootstrap-server localhost:9092 | head -1"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+    networks:
+      - tatva-net
+
+  # ---------------------------------------------------------------------------
+  # Kafka Topic Initializer — Create TATVA topics with correct partitions
+  # ---------------------------------------------------------------------------
+  kafka-init:
+    image: confluentinc/cp-kafka:7.7.0
+    container_name: tatva-kafka-init
+    depends_on:
+      kafka:
+        condition: service_healthy
+    entrypoint: ["/bin/bash", "-c"]
+    command: |
+      "
+      echo '═══════════════════════════════════════════════════════'
+      echo '  TATVA — Creating Kafka Topics'
+      echo '═══════════════════════════════════════════════════════'
+
+      # Core ingestion topics
+      kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --topic raw.news.articles          --partitions 6  --replication-factor 1
+      kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --topic nlp.entities.extracted      --partitions 6  --replication-factor 1
+      kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --topic nlp.relations.extracted     --partitions 6  --replication-factor 1
+      kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --topic graph.updates               --partitions 6  --replication-factor 1
+      kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --topic analytics.events            --partitions 3  --replication-factor 1
+      kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --topic alerts.triggers             --partitions 3  --replication-factor 1
+      kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --topic system.health               --partitions 1  --replication-factor 1
+
+      # Dead Letter Queues (one per core topic)
+      kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --topic raw.news.articles.dlq      --partitions 3  --replication-factor 1
+      kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --topic nlp.entities.extracted.dlq  --partitions 3  --replication-factor 1
+      kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --topic nlp.relations.extracted.dlq --partitions 3  --replication-factor 1
+      kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --topic graph.updates.dlq           --partitions 3  --replication-factor 1
+      kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --topic analytics.events.dlq        --partitions 3  --replication-factor 1
+      kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --topic alerts.triggers.dlq         --partitions 3  --replication-factor 1
+
+      echo ''
+      echo 'Topics created:'
+      kafka-topics --list --bootstrap-server kafka:29092
+      echo ''
+      echo '═══════════════════════════════════════════════════════'
+      echo '  TATVA — Kafka Topics Ready!'
+      echo '═══════════════════════════════════════════════════════'
+      "
+    networks:
+      - tatva-net
+
+  # ---------------------------------------------------------------------------
+  # Redis 7 — Caching (entity summaries, search, sessions, bloom filter)
+  # ---------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: tatva-redis
+    restart: unless-stopped
+    command: redis-server --maxmemory ${REDIS_MAXMEMORY:-256mb} --maxmemory-policy allkeys-lru --appendonly yes
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - tatva-net
+
+  # ---------------------------------------------------------------------------
+  # MinIO — Object storage for documents, uploaded files, report exports
+  # ---------------------------------------------------------------------------
+  minio:
+    image: minio/minio:latest
+    container_name: tatva-minio
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-tatva_admin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-tatva_dev_2026}
+    command: server /data --console-address ":9001"
+    ports:
+      - "${MINIO_API_PORT:-9000}:9000"
+      - "${MINIO_CONSOLE_PORT:-9001}:9001"
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    networks:
+      - tatva-net
+
+  # ---------------------------------------------------------------------------
+  # Kafka UI (optional dev tool — view topics, messages, consumer groups)
+  # ---------------------------------------------------------------------------
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: tatva-kafka-ui
+    restart: unless-stopped
+    depends_on:
+      kafka:
+        condition: service_healthy
+    environment:
+      KAFKA_CLUSTERS_0_NAME: tatva-local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+    ports:
+      - "${KAFKA_UI_PORT:-8090}:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8080 || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 15s
+    profiles:
+      - dev-tools
+    networks:
+      - tatva-net
+
+# =============================================================================
+# Volumes — Persistent storage
+# =============================================================================
+volumes:
+  neo4j-data:
+  neo4j-logs:
+  neo4j-plugins:
+  postgres-data:
+  elasticsearch-data:
+  zookeeper-data:
+  zookeeper-log:
+  kafka-data:
+  redis-data:
+  minio-data:
+
+# =============================================================================
+# Networks
+# =============================================================================
+networks:
+  tatva-net:
+    driver: bridge

@@ -1,0 +1,54 @@
+# =============================================================================
+# TATVA — Git Ignore
+# =============================================================================
+
+# --- Environment & Secrets ---
+.env
+*.env.local
+*.env.production
+
+# --- Java / Maven ---
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+.mvn/wrapper/maven-wrapper.jar
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+.eggs/
+*.egg
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+venv/
+.venv/
+
+# --- Node.js / Frontend ---
+node_modules/
+.next/
+out/
+build/
+.turbo/
+
+# --- IDE ---
+.idea/
+*.iml
+*.iws
+.vscode/settings.json
+*.swp
+*.swo
+*~
+.DS_Store
+
+# --- Docker volumes (local) ---
+docker-data/
+
+# --- OS ---
+Thumbs.db

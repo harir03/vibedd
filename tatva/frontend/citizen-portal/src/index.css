@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+:root {
+  /* JalDrishti flood risk colors */
+  --color-safe: #22c55e;
+  --color-caution: #eab308;
+  --color-danger: #f97316;
+  --color-severe: #ef4444;
+  --color-primary: #0ea5e9;
+  --color-primary-dark: #0284c7;
+  --color-bg: #f8fafc;
+  --color-card: #ffffff;
+  --color-text: #0f172a;
+  --color-muted: #64748b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Minimum touch target size — WCAG 2.1 AA */
+button, a, [role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Offline banner */
+.offline-banner {
+  background-color: #fbbf24;
+  color: #78350f;
+  text-align: center;
+  padding: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+/* Risk level badges */
+.risk-safe { background-color: var(--color-safe); color: white; }
+.risk-caution { background-color: var(--color-caution); color: #422006; }
+.risk-danger { background-color: var(--color-danger); color: white; }
+.risk-severe { background-color: var(--color-severe); color: white; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

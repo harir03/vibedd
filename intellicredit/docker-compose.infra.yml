@@ -1,0 +1,16 @@
+# Infrastructure-only docker compose (for local dev)
+version: "3.9"
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: ic-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    mem_limit: 256m
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3

@@ -1,0 +1,15 @@
+{
+  "name": "aria-fidelity-ranking",
+  "version": "1.0.0",
+  "description": "ARIA Fidelity Ranking Engine — Feature 07. Multi-source weighted score aggregation with feedback-driven auto-tuning.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "ioredis": "^5.6.1",
+    "mongoose": "^8.14.3",
+    "pino": "^9.6.0"
+  }
+}

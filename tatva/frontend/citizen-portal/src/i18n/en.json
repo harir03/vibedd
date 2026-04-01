@@ -1,0 +1,108 @@
+{
+  "app": {
+    "name": "JalDrishti",
+    "tagline": "Urban Flood Watch"
+  },
+  "simple_mode": {
+    "your_area": "Your Area",
+    "ward": "Ward",
+    "flood_risk": "Flood Risk",
+    "how_prepared": "How prepared is your area",
+    "next_hours": "Next {{hours}} hours",
+    "rain_expected": "{{amount}}mm rain expected",
+    "see_safe_routes": "See Safe Routes",
+    "emergency": "Emergency",
+    "view_map": "View Full Map",
+    "last_updated": "Last updated {{time}}"
+  },
+  "risk": {
+    "safe": "Safe",
+    "safe_desc": "No flooding expected. Stay alert during heavy rains.",
+    "moderate": "Moderate Risk",
+    "moderate_desc": "Light waterlogging possible on low-lying streets.",
+    "danger": "High Risk",
+    "danger_desc": "Significant waterlogging expected. Avoid underpasses.",
+    "severe": "Severe Risk",
+    "severe_desc": "Dangerous flooding expected. Move to higher ground immediately."
+  },
+  "map": {
+    "title": "Flood Risk Map",
+    "legend": "Legend",
+    "hotspots": "Flood Hotspots",
+    "wards": "Ward Boundaries",
+    "sensors": "Water Level Sensors",
+    "evacuation": "Evacuation Routes"
+  },
+  "report": {
+    "title": "Report Flooding",
+    "water_depth": "Water Depth",
+    "ankle": "Ankle deep",
+    "knee": "Knee deep",
+    "waist": "Waist deep",
+    "chest": "Chest deep",
+    "above_head": "Above head",
+    "description": "Description",
+    "description_placeholder": "Describe the flooding situation...",
+    "add_photo": "Add Photo",
+    "submit": "Submit Report",
+    "submitting": "Submitting...",
+    "success": "Report submitted successfully!",
+    "offline_queued": "Report saved. Will send when online.",
+    "rate_limited": "You can submit up to 3 reports per hour."
+  },
+  "emergency_contacts": {
+    "title": "Emergency Contacts",
+    "ndrf": "NDRF (Flood Rescue)",
+    "fire": "Fire Department",
+    "police": "Police",
+    "ambulance": "Ambulance",
+    "disaster_helpline": "Disaster Helpline",
+    "emergency_number": "Emergency",
+    "share_location": "Share My Location"
+  },
+  "readiness": {
+    "title": "Area Readiness",
+    "score_label": "How prepared is your area",
+    "grade_a": "Excellent",
+    "grade_b": "Good",
+    "grade_c": "Fair",
+    "grade_d": "Poor",
+    "grade_f": "Critical",
+    "what_you_can_do": "What YOU can do",
+    "tip_1": "Keep emergency kit ready with torch, water, medicines",
+    "tip_2": "Save emergency numbers on your phone",
+    "tip_3": "Know your nearest evacuation route",
+    "tip_4": "Don't walk through floodwater — it may hide open manholes"
+  },
+  "nav": {
+    "home": "Home",
+    "map": "Map",
+    "report": "Report",
+    "readiness": "Readiness",
+    "settings": "Settings"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "notifications": "Flood Alert Notifications",
+    "font_size": "Font Size",
+    "small": "A-",
+    "medium": "A",
+    "large": "A+",
+    "advanced_mode": "Advanced Mode",
+    "advanced_desc": "Show technical data, charts, and detailed maps"
+  },
+  "offline": {
+    "banner": "OFFLINE — Last updated {{time}}",
+    "cached_data": "Showing cached data"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "close": "Close",
+    "back": "Back",
+    "cancel": "Cancel",
+    "save": "Save"
+  }
+}

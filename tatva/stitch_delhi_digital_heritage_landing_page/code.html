@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#da0b0b",
+                "background-light": "#f8f5f5",
+                "background-dark": "#221010",
+              },
+              fontFamily: {
+                "display": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+      </script>
+<title>India Capitals - Delhi | Heritage Portal</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen w-full flex-col">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-light/80 backdrop-blur-md dark:bg-background-dark/80 px-4 md:px-10 lg:px-40 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined text-3xl font-bold">account_balance</span>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">India Capitals <span class="text-primary font-black">Delhi</span></h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary text-sm font-medium transition-colors" href="#">Heritage</a>
+<a class="text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary text-sm font-medium transition-colors" href="#">Data Layers</a>
+<a class="text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary text-sm font-medium transition-colors" href="#">Timeline</a>
+<a class="text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary text-sm font-medium transition-colors" href="#">Open Source</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center bg-primary/5 dark:bg-primary/10 rounded-lg px-3 py-2 border border-primary/10">
+<span class="material-symbols-outlined text-primary text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-32 lg:w-48 placeholder:text-slate-400" placeholder="Search archives..." type="text"/>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg font-bold text-sm transition-all shadow-lg shadow-primary/20">
+                        Explore Now
+                    </button>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="relative w-full px-4 md:px-10 lg:px-40 py-10">
+<div class="relative overflow-hidden rounded-xl aspect-[21/9] flex items-center justify-center bg-slate-900">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/40 to-transparent z-10"></div>
+<img alt="Delhi Heritage" class="w-full h-full object-cover opacity-80" data-alt="Majestic view of Humayun's Tomb at sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEz37g6TT3gxJITh-4JSmFAGGcG9UiZSYjJl_GV6vojXG9DVzTtW22wZPsIeV-HHKi8J8pX6rtPgnGVWxP1a-DUiRidOHT2k6Jdm3r4OblBbp7KJDrVWoFjx3QH2i9zpNh5byYlFOlclI-XC8sEXqGRoWEm53H8RotoghsRGX7xWRrkQ8Zem_bcZSBEx4xTPDAreOyApDPD0yfXPh-9z-sbdizbmLBoRvFkBPG_GqSGJTqFRQoXmTvlDs5nDG7QGny2jVabUNUNIth"/>
+</div>
+<div class="relative z-20 text-center px-6 max-w-3xl">
+<span class="bg-primary/20 text-primary px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4 inline-block backdrop-blur-sm border border-primary/30">Digital Twin Initiative</span>
+<h1 class="text-white text-4xl md:text-6xl font-black leading-tight tracking-tight mb-4">
+                            Delhi: The Eternal Capital
+                        </h1>
+<p class="text-slate-200 text-base md:text-xl font-normal leading-relaxed mb-8">
+                            A premium digital heritage portal preserving 1,000 years of history through spatial data, high-fidelity mapping, and administrative evolution.
+                        </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-primary hover:bg-primary/90 text-white h-12 px-8 rounded-lg font-bold flex items-center justify-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined">map</span>
+                                Explore the Data
+                            </button>
+<button class="bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/30 h-12 px-8 rounded-lg font-bold flex items-center justify-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined">code</span>
+                                Open Source Mission
+                            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Section -->
+<section class="px-4 md:px-10 lg:px-40 py-20">
+<div class="mb-12">
+<h2 class="text-slate-900 dark:text-slate-100 text-3xl md:text-4xl font-black mb-4">Project Architecture</h2>
+<p class="text-slate-600 dark:text-slate-400 max-w-2xl text-lg">Our platform integrates centuries of historical research with modern spatial datasets to visualize the capital's urban transformation.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Feature 1 -->
+<div class="group p-6 rounded-xl bg-white dark:bg-background-dark/40 border border-primary/5 hover:border-primary/30 transition-all hover:shadow-xl hover:shadow-primary/5">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">history_toggle_off</span>
+</div>
+<h3 class="text-lg font-bold mb-2">Historical Timelines</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Trace the evolution from the ancient Tomar dynasty to the modern metropolis with granular precision.</p>
+</div>
+<!-- Feature 2 -->
+<div class="group p-6 rounded-xl bg-white dark:bg-background-dark/40 border border-primary/5 hover:border-primary/30 transition-all hover:shadow-xl hover:shadow-primary/5">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">public</span>
+</div>
+<h3 class="text-lg font-bold mb-2">Geographic Data</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">High-resolution GIS layers mapping topography, hydrology, and architectural footprints across eras.</p>
+</div>
+<!-- Feature 3 -->
+<div class="group p-6 rounded-xl bg-white dark:bg-background-dark/40 border border-primary/5 hover:border-primary/30 transition-all hover:shadow-xl hover:shadow-primary/5">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">account_tree</span>
+</div>
+<h3 class="text-lg font-bold mb-2">Admin Boundaries</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Mapping jurisdictional shifts from imperial quarters to current district and ward administrations.</p>
+</div>
+<!-- Feature 4 -->
+<div class="group p-6 rounded-xl bg-white dark:bg-background-dark/40 border border-primary/5 hover:border-primary/30 transition-all hover:shadow-xl hover:shadow-primary/5">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">apartment</span>
+</div>
+<h3 class="text-lg font-bold mb-2">Urban Development</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Visualizing the hyper-growth of the NCR through interactive demographic and infrastructure data.</p>
+</div>
+</div>
+</section>
+<!-- Horizontal Timeline Section -->
+<section class="px-4 md:px-10 lg:px-40 py-20 bg-primary/5 border-y border-primary/10">
+<div class="text-center mb-16">
+<h2 class="text-2xl md:text-3xl font-black mb-2">The Timeline of Empires</h2>
+<p class="text-slate-500 dark:text-slate-400 uppercase tracking-widest text-xs font-bold">A journey through a thousand years</p>
+</div>
+<div class="relative">
+<!-- Progress Line -->
+<div class="absolute top-1/2 left-0 w-full h-1 bg-primary/10 -translate-y-1/2 hidden lg:block"></div>
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+<!-- Era 1 -->
+<div class="relative flex flex-col items-center lg:items-start group">
+<div class="z-10 w-12 h-12 rounded-full bg-white dark:bg-background-dark border-4 border-primary/20 flex items-center justify-center mb-4 group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary">fort</span>
+</div>
+<div class="text-center lg:text-left">
+<span class="text-primary font-bold text-xs">8th - 12th Century</span>
+<h4 class="font-black text-lg">Tomar Dynasty</h4>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Lalkot and the birth of Dhillika as a regional power.</p>
+</div>
+</div>
+<!-- Era 2 -->
+<div class="relative flex flex-col items-center lg:items-start group">
+<div class="z-10 w-12 h-12 rounded-full bg-white dark:bg-background-dark border-4 border-primary/20 flex items-center justify-center mb-4 group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary">mosque</span>
+</div>
+<div class="text-center lg:text-left">
+<span class="text-primary font-bold text-xs">13th - 16th Century</span>
+<h4 class="font-black text-lg">Delhi Sultanate</h4>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Expansion of the Five Cities and Indo-Islamic architecture.</p>
+</div>
+</div>
+<!-- Era 3 -->
+<div class="relative flex flex-col items-center lg:items-start group">
+<div class="z-10 w-12 h-12 rounded-full bg-white dark:bg-background-dark border-4 border-primary/20 flex items-center justify-center mb-4 group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary">castle</span>
+</div>
+<div class="text-center lg:text-left">
+<span class="text-primary font-bold text-xs">16th - 19th Century</span>
+<h4 class="font-black text-lg">Mughal Empire</h4>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Shahjahanabad, the Red Fort, and the zenith of culture.</p>
+</div>
+</div>
+<!-- Era 4 -->
+<div class="relative flex flex-col items-center lg:items-start group">
+<div class="z-10 w-12 h-12 rounded-full bg-white dark:bg-background-dark border-4 border-primary/20 flex items-center justify-center mb-4 group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary">domain</span>
+</div>
+<div class="text-center lg:text-left">
+<span class="text-primary font-bold text-xs">1911 - 1947</span>
+<h4 class="font-black text-lg">British Raj</h4>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-1">The construction of New Delhi and Lutyens' Imperial vision.</p>
+</div>
+</div>
+<!-- Era 5 -->
+<div class="relative flex flex-col items-center lg:items-start group">
+<div class="z-10 w-12 h-12 rounded-full bg-primary flex items-center justify-center mb-4 shadow-lg shadow-primary/40">
+<span class="material-symbols-outlined text-white">flag</span>
+</div>
+<div class="text-center lg:text-left">
+<span class="text-primary font-bold text-xs">1947 - Present</span>
+<h4 class="font-black text-lg">Modern Republic</h4>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Evolution into a global megalopolis and digital future.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA Section -->
+<section class="px-4 md:px-10 lg:px-40 py-24 text-center">
+<div class="bg-background-dark text-white rounded-2xl p-12 lg:p-20 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -mr-32 -mt-32"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -ml-32 -mb-32"></div>
+<div class="relative z-10 max-w-2xl mx-auto">
+<h2 class="text-3xl md:text-5xl font-black mb-6">Build the Digital Twin of History</h2>
+<p class="text-slate-400 text-lg mb-10 leading-relaxed">Join our mission to document and democratize the heritage data of Delhi. Contribute to our open-source datasets or explore the archives.</p>
+<div class="flex flex-wrap gap-4 justify-center">
+<button class="bg-primary hover:bg-primary/90 text-white px-10 py-4 rounded-xl font-bold transition-all transform hover:scale-105">
+                                Start Exploring
+                            </button>
+<button class="bg-transparent border border-white/20 hover:bg-white/10 text-white px-10 py-4 rounded-xl font-bold transition-all transform hover:scale-105">
+                                View GitHub Repository
+                            </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="px-4 md:px-10 lg:px-40 py-12 border-t border-primary/10 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 text-primary opacity-80">
+<span class="material-symbols-outlined">account_balance</span>
+<p class="font-bold">India Capitals - Delhi</p>
+</div>
+<div class="flex gap-8 text-sm text-slate-500 dark:text-slate-400">
+<a class="hover:text-primary" href="#">Data Privacy</a>
+<a class="hover:text-primary" href="#">Documentation</a>
+<a class="hover:text-primary" href="#">API</a>
+<a class="hover:text-primary" href="#">Contact</a>
+</div>
+<p class="text-xs text-slate-400">© 2024 Digital Heritage Archive. All rights reserved.</p>
+</footer>
+</div>
+</body></html>

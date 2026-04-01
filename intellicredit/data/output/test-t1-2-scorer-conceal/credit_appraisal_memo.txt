@@ -1,0 +1,87 @@
+================================================================================
+CREDIT APPRAISAL MEMO — CONFIDENTIAL
+================================================================================
+Date: 09 March 2026
+Session: test-t1-2-scorer-conceal
+Borrower: XYZ Steel
+
+--------------------------------------------------------------------------------
+1. EXECUTIVE SUMMARY
+--------------------------------------------------------------------------------
+Credit Score: 340/850 (Default Risk)
+Recommendation: REJECTED — Permanent reject
+
+--------------------------------------------------------------------------------
+3. KEY FINANCIAL METRICS
+--------------------------------------------------------------------------------
+  Revenue (FY2023):     ₹14,230L
+
+--------------------------------------------------------------------------------
+4. SCORE BREAKDOWN BY MODULE
+--------------------------------------------------------------------------------
+  CAPACITY    :   +0 points (range: -100 to +150, 0 metric(s))
+  CHARACTER   :   -5 points (range: -200 to +120, 4 metric(s))
+  CAPITAL     :   +0 points (range: -80 to +80, 0 metric(s))
+  COLLATERAL  :   +5 points (range: -40 to +60, 1 metric(s))
+  CONDITIONS  :   +0 points (range: -50 to +50, 0 metric(s))
+  COMPOUND    :  -10 points (range: -130 to +57, 1 metric(s))
+  BASE        : +350
+  TOTAL       :  340/850
+
+--------------------------------------------------------------------------------
+5. CROSS-VERIFICATION SUMMARY
+--------------------------------------------------------------------------------
+  No cross-verification flags.
+
+--------------------------------------------------------------------------------
+6. RISK FLAGS
+--------------------------------------------------------------------------------
+  ⚠ [CHARACTER] Related Party Transactions: -15
+    2 RPTs totalling ₹1200.0L — moderate level needs monitoring
+  ⚠ [CHARACTER] RPT Concealment (BM vs AR): -35
+    Board Minutes record 3 RPT approvals but Annual Report discloses only 2. ₹340.0L in undisclosed RPTs indicates active governance concealment.
+
+--------------------------------------------------------------------------------
+7. LOAN TERMS RECOMMENDATION
+--------------------------------------------------------------------------------
+  Sanction:  0% of requested amount
+  Rate:      N/A — Rejected
+  Tenure:    N/A
+  Review:    N/A
+
+--------------------------------------------------------------------------------
+8. DETAILED METRIC BREAKDOWN
+--------------------------------------------------------------------------------
+  [CHARACTER] Auditor Qualifications: Clean opinion
+    Impact: +30 | Confidence: 92%
+    Source: Annual Report (p.9)
+    Reasoning: Clean audit opinion indicates good governance and transparent reporting
+
+  [CHARACTER] Related Party Transactions: 2 RPTs totalling ₹1200.0L
+    Impact: -15 | Confidence: 85%
+    Source: Annual Report (p.68)
+    Reasoning: 2 RPTs totalling ₹1200.0L — moderate level needs monitoring
+
+  [CHARACTER] Cheque Bounces: 0 bounces
+    Impact: +15 | Confidence: 94%
+    Source: Bank Statement (p.1)
+    Reasoning: Zero cheque bounces demonstrates consistent financial discipline
+
+  [CHARACTER] RPT Concealment (BM vs AR): 1 RPT(s) concealed, ₹340.0L undisclosed
+    Impact: -35 | Confidence: 88%
+    Source: Board Minutes vs Annual Report (p.68)
+    Reasoning: Board Minutes record 3 RPT approvals but Annual Report discloses only 2. ₹340.0L in undisclosed RPTs indicates active governance concealment.
+
+  [COLLATERAL] Collateral Coverage: Data unavailable — default assessment
+    Impact: +5 | Confidence: 40%
+    Source: Assessment Default (p.0)
+    Reasoning: Shareholding data unavailable; applying conservative default score
+
+  [COMPOUND] Data Contradictions: 1 contradiction(s)
+    Impact: -10 | Confidence: 75%
+    Source: Consolidator (p.0)
+    Reasoning: 1 contradiction(s) detected across document sources
+
+================================================================================
+END OF CREDIT APPRAISAL MEMO
+================================================================================

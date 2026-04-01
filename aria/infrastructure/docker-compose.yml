@@ -1,0 +1,262 @@
+# ============================================================================
+# ARIA — Docker Compose Configuration
+# Adapted from: maf-app/docker-compose.yml
+# 
+# Changes from original:
+#   - Renamed services: maf-ui → aria-dashboard, maf-engine → aria-gateway
+#   - Added port range 8000-8100 for dynamic proxy listeners per protected service
+#   - Added ChromaDB service for vector memory (Feature 15)
+#   - Added Python detection service placeholder (Features 05, 06)
+#   - Renamed containers and database
+#   - Kept Ollama + model-puller + MongoDB + Redis as-is
+# ============================================================================
+
+services:
+
+  # ── Dashboard UI (Next.js 16) ──────────────────────────────────────────
+  # Feature 02: Dashboard UI
+  # Feature 14: Learning Dashboard
+  # Feature 17: Human Triage Interface
+  aria-dashboard:
+    build:
+      context: ../apps/dashboard
+      dockerfile: Dockerfile
+    container_name: aria-dashboard
+    image: aria-dashboard:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/aria_db
+      - REDIS_URI=redis://redis:6379
+      - NODE_ENV=production
+      - OLLAMA_HOST=http://aria-ai:11434
+      - CHROMADB_HOST=http://chromadb:8000
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - aria-network
+    restart: always
+
+  # ── Reverse Proxy Gateway (Node.js) ────────────────────────────────────
+  # Feature 01: Reverse Proxy Gateway
+  # Feature 07: Fidelity Ranking (runs inside gateway)
+  aria-gateway:
+    build:
+      context: ../apps/gateway
+      dockerfile: Dockerfile
+    container_name: aria-gateway
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8001-8100:8001-8100"   # Dynamic listener ports for protected services
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/aria_db
+      - REDIS_URI=redis://redis:6379
+      - OLLAMA_HOST=http://aria-ai:11434
+      - CHROMADB_HOST=http://chromadb:8000
+    depends_on:
+      - mongo
+      - redis
+      - aria-ai
+    networks:
+      - aria-network
+    restart: always
+
+  # ── Python Detection Service ───────────────────────────────────────────
+  # Feature 05: Anomaly Detection (PyOD, tsfresh)
+  # Feature 06: Behavioral Analytics / UEBA
+  # Feature 08: Alert Correlation (LangGraph)
+  # Feature 13: Predictive Analysis
+  aria-detection:
+    build:
+      context: ../services
+      dockerfile: detection/Dockerfile
+    container_name: aria-detection
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/aria_db
+      - REDIS_URI=redis://redis:6379
+      - OLLAMA_HOST=http://aria-ai:11434
+      - CHROMADB_HOST=http://chromadb:8000
+    depends_on:
+      - mongo
+      - redis
+      - chromadb
+    networks:
+      - aria-network
+    restart: always
+
+  # ── MongoDB 6.0 ────────────────────────────────────────────────────────
+  # Stores: alerts, incidents, feedback, learned patterns, playbooks,
+  #         baseline profiles, evolution history
+  mongo:
+    image: mongo:6.0
+    container_name: aria-mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - aria-network
+    restart: always
+
+  # ── Redis 7.0 ──────────────────────────────────────────────────────────
+  # Used for: pub/sub config reload, ingestion queue, session state,
+  #           score caching, real-time alert streaming
+  redis:
+    image: redis:7.0-alpine
+    container_name: aria-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - aria-network
+    restart: always
+
+  # ── Ollama (Local LLM) ────────────────────────────────────────────────
+  # Used for: threat analysis, playbook generation, regex evolution,
+  #           prompt evolution, NL query, embeddings, finetuning
+  aria-ai:
+    image: ollama/ollama:latest
+    container_name: aria-ai
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - aria-network
+    restart: always
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+
+  # ── Model Puller (Init Container) ─────────────────────────────────────
+  # Automatically pulls the Mistral model on first startup
+  aria-model-puller:
+    image: curlimages/curl:latest
+    container_name: aria-model-puller
+    depends_on:
+      - aria-ai
+    networks:
+      - aria-network
+    command: >
+      /bin/sh -c "
+        echo 'Waiting for Ollama to be ready...';
+        until curl -s http://aria-ai:11434/ > /dev/null; do sleep 2; done;
+        echo 'Ollama is ready. Pulling mistral model...';
+        curl -X POST http://aria-ai:11434/api/pull -d '{\"name\": \"mistral\"}';
+        echo 'Model pull completed.';
+      "
+
+  # ── ChromaDB (Vector Database) ────────────────────────────────────────
+  # Feature 15: Vector Memory
+  # Used for: incident similarity search, pattern recognition,
+  #           predictive analysis, learned pattern recall
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: aria-chromadb
+    ports:
+      - "8000:8000"
+    volumes:
+      - chromadb_data:/chroma/chroma
+    environment:
+      - IS_PERSISTENT=TRUE
+      - ANONYMIZED_TELEMETRY=FALSE
+    networks:
+      - aria-network
+    restart: always
+
+  # ── Background Workers ──────────────────────────────────────────────────
+  aria-alert-correlation:
+    build:
+      context: ../services/alert-correlation
+    container_name: aria-alert-correlation
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/aria_db
+      - REDIS_URI=redis://redis:6379
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - aria-network
+    restart: always
+
+  aria-playbook-generation:
+    build:
+      context: ../services/playbook-generation
+    container_name: aria-playbook-generation
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/aria_db
+      - REDIS_URI=redis://redis:6379
+      - OLLAMA_HOST=http://aria-ai:11434
+    depends_on:
+      - mongo
+      - redis
+      - aria-ai
+    networks:
+      - aria-network
+    restart: always
+
+  aria-self-evolving-agent:
+    build:
+      context: ../services/self-evolving-agent
+    container_name: aria-self-evolving-agent
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/aria_db
+      - REDIS_URI=redis://redis:6379
+      - OLLAMA_HOST=http://aria-ai:11434
+    depends_on:
+      - mongo
+      - redis
+      - aria-ai
+    networks:
+      - aria-network
+    restart: always
+
+  aria-model-finetuning:
+    build:
+      context: ../services/model-finetuning
+    container_name: aria-model-finetuning
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/aria_db
+      - REDIS_URI=redis://redis:6379
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - aria-network
+    restart: always
+
+  # ── ChromaDB Capture Worker ──────────────────────────────────────────
+  aria-vector-memory:
+    build:
+      context: ../services/vector-memory
+    container_name: aria-vector-memory
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/aria_db
+      - REDIS_URI=redis://redis:6379
+      - CHROMADB_HOST=http://chromadb:8000
+    depends_on:
+      - mongo
+      - redis
+      - chromadb
+    networks:
+      - aria-network
+    restart: always
+
+networks:
+  aria-network:
+    driver: bridge
+
+volumes:
+  mongo_data:
+  redis_data:
+  ollama_data:
+  chromadb_data:

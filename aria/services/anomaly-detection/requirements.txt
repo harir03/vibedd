@@ -1,0 +1,9 @@
+# ARIA Feature 05 — Anomaly Detection
+# [ARIA] Python dependencies for the anomaly detection worker service.
+# Pin minimum versions for reproducibility; allow patch updates.
+
+pyod>=2.0.0
+redis>=5.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+tsfresh>=0.20.0

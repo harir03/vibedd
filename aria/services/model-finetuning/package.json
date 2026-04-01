@@ -1,0 +1,16 @@
+{
+    "name": "aria-model-finetuning",
+    "version": "1.0.0",
+    "description": "ARIA Model Fine-Tuning Worker — creates fine-tuned Ollama models from confirmed analyst feedback",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "mongoose": "^8.1.1",
+        "redis": "^4.6.13",
+        "pino": "^8.19.0"
+    },
+    "author": "ARIA Team",
+    "license": "ISC"
+}

@@ -1,0 +1,25 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: search-service
+
+  elasticsearch:
+    uris: ${ELASTICSEARCH_URI:http://localhost:9200}
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+springdoc:
+  api-docs:
+    path: /api/search/v3/api-docs
+  swagger-ui:
+    path: /api/search/swagger-ui.html
+
+logging:
+  level:
+    com.tatva.search: DEBUG
+    org.elasticsearch: INFO

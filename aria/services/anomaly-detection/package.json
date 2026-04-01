@@ -1,0 +1,16 @@
+{
+  "name": "aria-anomaly-detection",
+  "version": "1.0.0",
+  "description": "ARIA Feature 05: Statistical anomaly detection for banking traffic",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "mongoose": "^8.15.1",
+    "redis": "^4.7.0",
+    "pino": "^9.6.0",
+    "pino-pretty": "^13.0.0",
+    "uuid": "^11.1.0"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "refresh_interval": "5s",
+    "analysis": {
+      "filter": {
+        "autocomplete_filter": {
+          "type": "edge_ngram",
+          "min_gram": 2,
+          "max_gram": 20
+        }
+      },
+      "analyzer": {
+        "tatva_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": ["lowercase", "asciifolding"]
+        },
+        "autocomplete_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": ["lowercase", "asciifolding", "autocomplete_filter"]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "id": { "type": "keyword" },
+      "canonicalName": {
+        "type": "text",
+        "analyzer": "tatva_analyzer",
+        "fields": {
+          "keyword": { "type": "keyword" },
+          "autocomplete": {
+            "type": "text",
+            "analyzer": "autocomplete_analyzer",
+            "search_analyzer": "tatva_analyzer"
+          }
+        }
+      },
+      "aliases": {
+        "type": "text",
+        "analyzer": "tatva_analyzer",
+        "fields": { "keyword": { "type": "keyword" } }
+      },
+      "type": { "type": "keyword" },
+      "domain": { "type": "keyword" },
+      "description": {
+        "type": "text",
+        "analyzer": "tatva_analyzer"
+      },
+      "coordinates": { "type": "geo_point" },
+      "region": { "type": "keyword" },
+      "country": { "type": "keyword" },
+      "locationType": { "type": "keyword" },
+      "credibilityScore": { "type": "float" },
+      "clearanceLevel": { "type": "integer" },
+      "embedding": {
+        "type": "dense_vector",
+        "dims": 384,
+        "index": true,
+        "similarity": "cosine"
+      },
+      "metadata": { "type": "object", "enabled": false },
+      "createdAt": { "type": "date" },
+      "updatedAt": { "type": "date" }
+    }
+  }
+}

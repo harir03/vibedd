@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway-test
+
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+  cloud:
+    gateway:
+      mvc:
+        routes: []
+
+  # Disable Redis for tests
+  data:
+    redis:
+      repositories:
+        enabled: false
+
+tatva:
+  jwt:
+    access-token-expiry-minutes: 15
+    refresh-token-expiry-hours: 24
+    issuer: tatva-gateway-test
+  rate-limit:
+    admin: 5000
+    analyst: 500
+    api-consumer: 1000
+    public: 60
+
+logging:
+  level:
+    com.tatva: DEBUG

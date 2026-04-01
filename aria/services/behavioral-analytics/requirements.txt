@@ -1,0 +1,7 @@
+# ARIA Feature 06 — Behavioral Analytics (UEBA)
+# [ARIA] Python dependencies for the UEBA worker service.
+# Pin minimum versions for reproducibility; allow patch updates.
+
+redis>=5.0.0
+numpy>=1.24.0
+python-dateutil>=2.8.0
