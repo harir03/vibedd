@@ -18,7 +18,7 @@
 
 > *"Curiosity killed the cat..."*
 
-Hey — I'm **Hari Reddy**, a student at the **Army Institute of Technology**, and someone who simply **cannot stop experimenting**.
+Hey — I'm **Hari Reddy**, a student at the **Army Institute of Technology**, and someone who simply **cannot stop experimenting about new things**.
 I don't just learn tech — I **tear it apart**, rebuild it, break it again, and then ship it.
 Every project in this repo started from a **"what if?"** moment at 2 AM and turned into a full-fledged system by morning.
 I jump between **cybersecurity**, **AI agents**, **manufacturing intelligence**, **fintech**, and **geopolitical knowledge graphs** — not because I can't pick a lane, but because **every lane is interesting**.
